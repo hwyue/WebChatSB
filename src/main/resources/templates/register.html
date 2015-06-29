@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome to WebChat</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" th:href="@{/css/global.css}" href="/css/global.css"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}" href="/css/header.css"/>
+    <link rel="stylesheet" th:href="@{/css/register.css}" href="/css/register.css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: #top-state"></div>
+
+<div id="formContainer">
+    <h1>Please Sign Up</h1>
+
+
+
+    <form id="signUpForm" action="#" th:object="${registerFormBean}" method="post" th:action="@{/register}">
+
+        <p class="FormFieldErrMsg" th:if="${#fields.hasErrors('global')}" th:errors="*{global}">Global Error!</p>
+
+        <div>
+            <p class="FormFieldErrMsg"  th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+            <label for="firstName" th:text="#{register.form.firstName}">First:</label>
+            <input id="firstName" type="text" th:field="*{firstName}" required="required"/>
+        </div>
+
+        <div>
+            <p class="FormFieldErrMsg"  th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+            <label for="lastName" th:text="#{register.form.lastName}">Last:</label>
+            <input id="lastName" type="text" th:field="*{lastName}" required="required"/>
+        </div>
+
+        <div>
+            <p class="FormFieldErrMsg"  th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+            <label for="email" th:text="#{register.form.email}">EMail:</label>
+            <input id="email" type="text" th:field="*{email}" required="required"/>
+        </div>
+
+        <div>
+            <p class="FormFieldErrMsg"  th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+            <label for="username" th:text="#{register.form.username}">User Name:</label>
+            <input id="username" type="text" th:field="*{username}" required="required"/>
+        </div>
+
+        <div>
+            <p class="FormFieldErrMsg"  th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+            <label for="password" th:text="#{register.form.password}">Password:</label>
+            <input id="password" type="password" th:field="*{password}" pattern=".{3,32}" required="required"/>
+        </div>
+
+        <button type="submit" th:text="#{register.form.signUp}">Sign Up</button>
+    </form>
+</div>
+<div th:replace="fragments/footer :: #footer"></div>
+</body>
+</html>

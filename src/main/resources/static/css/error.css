@@ -1,0 +1,37 @@
+#container {
+    position: relative;
+}
+
+#container h1 {
+    position: relative;
+    top:20px;
+    color: #fff;
+    font-size: 34px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#container > div {
+    position: relative;
+    top:40px;
+    padding: 10px;
+    border-bottom: 2px solid #ff0;
+    border-top: 2px solid #ff0;
+    background-color: #f00;
+    opacity: 0.8;
+}
+
+#container p {
+    font-weight: bold;
+    text-align: center;
+}
+
+p.StatusError {
+    font-size: 50px;
+    color: #ff0;
+}
+
+p.Message {
+    font-size: 24px;
+    color: #ff0;
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Welcome to WebChat</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}" href="/css/global.css"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}" href="/css/header.css"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}" href="/css/index.css"/>
+</head>
+<body>
+    <div th:replace="fragments/header :: #top-state"></div>
+    <div id="container">
+    <h1>Welcome to WebChat (Spring Boot Version)</h1>
+    <div sec:authorize="isFullyAuthenticated()">
+        <span>You are currently logged in as '</span><span th:text="${#authentication.name}"></span>'!
+    </div>
+    <div sec:authorize="!isFullyAuthenticated()">
+        <span>You are currently not logged in!</span>
+        <div>
+            <a class="Btn" href="/login">Login</a> or <a class="Btn" href="/register">Register</a>
+        </div>
+    </div>
+    </div>
+    <div th:replace="fragments/footer :: #footer"></div>
+</body>
+</html>

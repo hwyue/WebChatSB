@@ -1,0 +1,77 @@
+[
+  {
+    "_class": "kc87.domain.Account",
+    "id": null,
+    "firstName": "Luke",
+    "lastName": "Skywalker",
+    "email": "luke.skywalker@jedi.org",
+    "username": "luke",
+    "password": "master",
+    "roles": "USER,ADMIN"
+  },
+  {
+    "_class": "kc87.domain.Account",
+    "id": null,
+    "firstName": "Tim",
+    "lastName": "Smith",
+    "email": "tim.smith@example.org",
+    "username": "timmy",
+    "password": "12345678",
+    "roles": "USER"
+  },
+
+  {
+    "_class": "kc87.domain.Account",
+    "id": null,
+    "firstName": "Susi",
+    "lastName": "Sorglos",
+    "email": "susi.sorlglos@example.org",
+    "username": "susi",
+    "password": "12345678",
+    "roles": "USER"
+  },
+
+  {
+    "_class": "kc87.domain.Account",
+    "id": null,
+    "firstName": "Gloria",
+    "lastName": "Gaynor",
+    "email": "gloria@example.org",
+    "username": "gloria",
+    "password": "12345678",
+    "roles": "USER"
+  },
+
+  {
+    "_class": "kc87.domain.Account",
+    "id": null,
+    "firstName": "Michael",
+    "lastName": "Jackson",
+    "email": "m.jackson@example.org",
+    "username": "michael",
+    "password": "12345678",
+    "roles": "USER"
+  },
+
+  {
+    "_class": "kc87.domain.Account",
+    "id": null,
+    "firstName": "Thomas",
+    "lastName": "Paris",
+    "email": "thomas.paris@example.org",
+    "username": "tom",
+    "password": "12345678",
+    "roles": "USER"
+  },
+
+  {
+    "_class": "kc87.domain.Account",
+    "id": null,
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "email": "jane.doe@example.org",
+    "username": "jane",
+    "password": "12345678",
+    "roles": "USER"
+  }
+]

@@ -1,0 +1,73 @@
+#formContainer {
+    position: relative;
+    top: 20%;
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 6px;
+    border: 1px outset #88f;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 8px 8px 6px rgba(0, 0, 0, 0.6);
+}
+
+#formContainer h1 {
+    color: #ff0;
+    margin-top: 16px;
+    text-align: center;
+}
+
+#loginForm {
+    margin: 10px;
+}
+
+#loginForm div {
+    padding: 10px;
+}
+
+#loginForm label {
+    display: inline-block;
+    font-weight: bold;
+    width: 120px;
+    color: #fff;
+}
+
+#loginForm label::before {
+    color: #f66;
+    font-size: 80%;
+    vertical-align: top;
+    content: "*";
+}
+
+
+#loginForm input:not([type=submit]) {
+    margin: 0 15px 0 0;
+    padding: 0 5px;
+    font-size: 16px;
+    font-weight: bold;
+    height: 28px;
+    border-radius: 3px;
+    border: 1px solid #888;
+    background-color: #000;
+    color: #ddd;
+}
+
+#loginForm button[type=submit] {
+    margin: 12px;
+    padding: 6px;
+    font-size: 18px;
+}
+
+.InfoMsg, .ErrorMsg {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.InfoMsg {
+    color: #fff;
+}
+
+.ErrorMsg {
+    color: #f22;
+}

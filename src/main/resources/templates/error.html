@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>An Error has occurred!</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}" href="/css/global.css"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}" href="/css/header.css"/>
+    <link rel="stylesheet" th:href="@{/css/error.css}" href="/css/error.css"/>
+</head>
+<body>
+<header id="top-state">
+    <div class="AccountBox">
+        <a class="HeaderBtn SignInUpBtn" href="/">Home</a>
+    </div>
+</header>
+<div id="container">
+    <h1>WebChat says:</h1>
+
+    <div th:if="${param.reason == null}">
+        <p class="StatusError" th:text="${status +' '+ error}"></p>
+        <p class="Message" th:text="'Message: ' + ${message}"></p>
+    </div>
+    <div th:if="${param.reason != null}">
+        <p class="StatusError" th:if="${param.reason[0] == 'chat_open'}" th:text="'Only one chat window allowed!'"></p>
+    </div>
+</div>
+<div th:replace="fragments/footer :: #footer"></div>
+</body>
+</html>

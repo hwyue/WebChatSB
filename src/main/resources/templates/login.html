@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}" href="/css/global.css"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}" href="/css/header.css"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}" href="/css/login.css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: #top-state"></div>
+
+<p class="InfoMsg" th:if="${param.logout != null}">You have been successfully logged out!</p>
+<p class="InfoMsg" th:if="${param.expired != null}">You have been logged out because your session has expired!</p>
+
+<p class="InfoMsg" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">You are already logged in!
+    <a href="/logout">Logout</a> first!
+</p>
+
+<div id="formContainer" sec:authorize="isAnonymous()">
+    <h1 th:text="#{login.greeting}"></h1>
+    <!--<p class="ErrorMsg" th:if="${param.error != null}" th:text="#{error.wrong_credentials}">Error!</p>-->
+    <form id="loginForm" name="form" th:object="${loginFormBean}" th:action="@{/login}" action="/login" method="POST">
+        <p class="ErrorMsg" th:if="${#fields.hasErrors('global')}" th:errors="*{global}">Global Error!</p>
+        <div>
+            <label for="username" th:text="#{login.form.username}">Username:</label>
+            <input id="username" type="text" th:field="*{username}" required="required"/>
+        </div>
+
+        <div>
+            <label for="password" th:text="#{login.form.password}">Password:</label>
+            <input id="password" type="password" th:field="*{password}" pattern=".{3,32}" required="required"/>
+        </div>
+        <button type="submit" id="login">Login</button>
+    </form>
+</div>
+<div th:replace="fragments/footer :: #footer"></div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome to WebChat</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/global.css}" href="/css/global.css"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}" href="/css/header.css"/>
+    <link href="/css/chat.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div th:replace="fragments/header :: #top-state"></div>
+    <div id="loginInfoOutput"></div>
+
+    <div id="chatBox">
+        <div id="infoOutput"></div>
+        <div id="chatOutput">
+            <div id="userListBox"></div>
+            <div id="chatMsgBox">
+                <div id="doLoginStranger">Log in, Stranger!</div>
+            </div>
+        </div>
+        <input id="chatInput" type="text" />
+        <input id="sendBtn" value="Send" type="button"/>
+    </div>
+    <div th:replace="fragments/footer :: #footer"></div>
+    <script src="/js/chat.js" ></script>
+</body>
+</html>

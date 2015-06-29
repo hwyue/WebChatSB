@@ -1,0 +1,1 @@
+Should only be accessible to fully authenticated users!

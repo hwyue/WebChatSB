@@ -1,0 +1,42 @@
+#container {
+    position: relative;
+    color: #fff;
+}
+
+#container h1 {
+    position: relative;
+    top:40px;
+    display: block;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px outset #f33;
+    background: rgba(255, 0, 0, 0.5);
+    box-shadow: 0px 0px 16px rgba(0, 0, 255, 0.7);
+    margin: auto;
+    text-align: center;
+    width: 800px;
+    color: #ff0;
+}
+
+#container div {
+    position: relative;
+    top:90px;
+    font-size: 28px;
+    text-align: center;
+}
+
+
+.Btn {
+    color: #000;
+    font-size: 36px;
+    font-weight: bold;
+    font-family: sans-serif;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 2px;
+    padding: 8px 12px;
+    border: 2px solid #480;
+    background: linear-gradient(to bottom, #ccffb1 0%, #74f132 50%, #55ea07 51%, #95fb5e 100%);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+}

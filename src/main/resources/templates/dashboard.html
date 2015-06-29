@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html data-ng-app="dashboardApp" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}" href="/css/global.css"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}" href="/css/header.css"/>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}" href="/css/dashboard.css"/>
+</head>
+<body data-ng-controller="DashboardCtrl">
+<div th:replace="fragments/header :: #top-state"></div>
+<div>
+    <h1>Account List</h1>
+
+    <div class="AccountList" data-ng-controller="AccountCtrl">
+        <table class="AccountTable">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>E-Mail Address</th>
+                <th>Roles</th>
+                <th>Created</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="account in accounts">
+                <td class="RwCell"><input data-ng-model="account.username" data-ng-focus="editorHandler($event,$index)"
+                                          data-ng-blur="editorHandler($event,$index)"/></td>
+                <td class="RwCell"><input data-ng-model="account.firstName" data-ng-focus="editorHandler($event,$index)"
+                                          data-ng-blur="editorHandler($event,$index)"/></td>
+                <td class="RwCell"><input data-ng-model="account.lastName" data-ng-focus="editorHandler($event,$index)"
+                                          data-ng-blur="editorHandler($event,$index)"/></td>
+                <td class="RwCell" title="{{account.email}}"><input data-ng-model="account.email"
+                                                                    data-ng-focus="editorHandler($event,$index)"
+                                                                    data-ng-blur="editorHandler($event,$index)"/></td>
+                <td class="RoCell">{{account.roles}}</td>
+                <td class="RoCell">{{account.created | date: 'dd.MM.yy HH:mm:ss.sss'}}</td>
+                <td class="DelCell">
+                    <button title="{{'Delete ' + account.username}}" data-ng-click="deleteHandler($event,$index)">
+                        &#x232b;</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="Pager">
+            <button data-ng-disabled="page.number == 0" data-ng-click="loadAccountPage(0)">FIRST</button>
+            <button data-ng-disabled="page.number == 0" data-ng-click="loadAccountPage(page.number - 1)">PREV</button>
+            <span>{{page.number + 1}} / {{page.totalPages}}</span>
+            <button data-ng-disabled="(page.number+1) >= page.totalPages"
+                    data-ng-click="loadAccountPage(page.number + 1)">
+                NEXT
+            </button>
+            <button data-ng-disabled="(page.number+1) >= page.totalPages"
+                    data-ng-click="loadAccountPage(page.totalPages - 1)">LAST
+            </button>
+        </div>
+        <div class="CreateUser">
+            <label>Username:</label>
+            <label>First Name:</label>
+            <label>Last Name:</label>
+            <label>E-Mail:</label>
+            <label>Password:</label><br/>
+            <input type="text" data-ng-model="account.username"/>
+            <input type="text" data-ng-model="account.firstName"/>
+            <input type="text" data-ng-model="account.lastName"/>
+            <input type="text" data-ng-model="account.email"/>
+            <input type="password" data-ng-model="account.password"/>
+            <button data-ng-click="createHandler(account)">CREATE</button>
+        </div>
+    </div>
+</div>
+
+<div class="ErrorMsgList" data-ng-show="footerMsg.error">
+    <span>{{footerMsg.error}}</span>
+    <ul data-ng-show="footerMsg.errors">
+        <li data-ng-repeat="error in footerMsg.errors">Value '{{error.invalidValue}}': {{error.message}}</li>
+    </ul>
+</div>
+<div class="FooterMsg">
+    <span data-ng-show="footerMsg.msg">{{footerMsg.msg}}</span>
+    <span class="SuccessMsg" data-ng-show="footerMsg.success">{{footerMsg.success}}</span>
+</div>
+<div th:replace="fragments/footer :: #footer"></div>
+<script src="/js/angular.min.js"></script>
+<script src="/js/angular-hal.js"></script>
+<script src="/js/dashboard.js"></script>
+</body>
+</html>

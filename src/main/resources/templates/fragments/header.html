@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<body>
+
+<header id="top-state">
+    <div id="statsOutput"></div>
+    <div class="AccountBox" sec:authorize="isFullyAuthenticated()">
+        <span class="AccountGreeting" th:text="'Hi, '+${#authentication.name}+'!'">Stranger</span>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:if="${#httpServletRequest.getServletPath() != '/intern'}" class="HeaderBtn DashboardBtn" href="/intern">Dashboard</a>
+        <a sec:authorize="hasRole('ROLE_USER')" th:if="${#httpServletRequest.getServletPath() != '/chat'}" class="HeaderBtn SignInUpBtn" href="/chat">Chat</a>
+        <form id="logoutForm" name="form" th:action="@{/logout}" action="/logout" method="POST">
+            <button class="HeaderBtn LogoutBtn" id="accountBtn" type="submit">Logout</button>
+        </form>
+    </div>
+    <div class="AccountBox" sec:authorize="isAnonymous()">
+        <span class="AccountGreeting">Hi, Stranger!</span>
+        <a class="HeaderBtn SignInUpBtn" href="/login">Login</a> or <a class="HeaderBtn SignInUpBtn" href="/register">Register</a>
+    </div>
+</header>
+
+</body>
+</html>
