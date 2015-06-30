@@ -1,6 +1,5 @@
 package kc87.config;
 
-import kc87.service.AccountService;
 import kc87.service.crypto.ScryptPasswordEncoder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
@@ -31,10 +31,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
    private static final Logger LOG = LogManager.getLogger(WebSecurityConfig.class);
 
    @Autowired
-   WebChatProperties webChatProperties;
+   private WebChatProperties webChatProperties;
+
+   //@Autowired
+   //private AccountService accountService;
 
    @Autowired
-   AccountService accountService;
+   private UserDetailsService userDetailsService;
 
    @Bean
    public SessionRegistry sessionRegistry() {
@@ -48,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
    @Override
    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-      auth.userDetailsService(accountService).passwordEncoder(new ScryptPasswordEncoder());
+      auth.userDetailsService(userDetailsService).passwordEncoder(new ScryptPasswordEncoder());
    }
 
    @Override

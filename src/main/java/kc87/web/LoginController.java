@@ -1,16 +1,13 @@
 package kc87.web;
 
+import kc87.service.SessionService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +25,12 @@ public class LoginController {
    private static final Logger LOG = LogManager.getLogger(LoginController.class);
    private static final GrantedAuthority ADMIN_AUTHORITY = new SimpleGrantedAuthority("ROLE_ADMIN");
 
-   @Autowired
-   private SessionRegistry sessionRegistry;
+   private SessionService sessionService;
 
    @Autowired
-   AuthenticationManager authenticationManager;
+   public LoginController(final SessionService service) {
+      this.sessionService = service;
+   }
 
    @RequestMapping(method = RequestMethod.GET)
    public ModelAndView form(final ModelAndView modelView, final HttpServletRequest request,
@@ -59,12 +57,8 @@ public class LoginController {
       }
 
       try {
-         Authentication authRequest = new UsernamePasswordAuthenticationToken(formBean.getUsername(),
-                 formBean.getPassword());
-         Authentication authResult = authenticationManager.authenticate(authRequest);
-         SecurityContextHolder.getContext().setAuthentication(authResult);
-         sessionRegistry.registerNewSession(request.getSession().getId(), authResult.getPrincipal());
-         //sessionRegistry.registerNewSession(request.changeSessionId(),authResult.getPrincipal());
+         Authentication authResult = sessionService.authenticateUserSession(request.getSession().getId(),
+                 formBean.getUsername(), formBean.getPassword());
          Cookie removeCookie = new Cookie("Enabled", "true");
          removeCookie.setMaxAge(0);
          response.addCookie(removeCookie);

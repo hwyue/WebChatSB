@@ -27,7 +27,7 @@ public class PersistenceConfig {
       private static final Logger LOG = LogManager.getLogger(PersistenceConfig.class);
 
       @Autowired
-      WebChatProperties webChatProperties;
+      private WebChatProperties webChatProperties;
 
       @Bean
       public DataSource dataSource() {
@@ -46,7 +46,7 @@ public class PersistenceConfig {
    @EnableMongoRepositories(basePackages = {"kc87.repository.mongo"})
    public static class MongoConfig {
       @Autowired
-      WebChatProperties webChatProperties;
+      private WebChatProperties webChatProperties;
 
       @Bean
       public MongoDbFactory mongoDbFactory() throws Exception {
@@ -66,7 +66,7 @@ public class PersistenceConfig {
            enableDefaultTransactions = true)
    public static class GenericJpaConfig {
       @Autowired
-      WebChatProperties webChatProperties;
+      private WebChatProperties webChatProperties;
 
       @Bean
       public DataSource dataSource() {
@@ -84,7 +84,7 @@ public class PersistenceConfig {
    @EnableMongoRepositories(basePackages = {"kc87.repository.mongo", "kc87.repository.generic"})
    public static class GenericMongoConfig {
       @Autowired
-      WebChatProperties webChatProperties;
+      private WebChatProperties webChatProperties;
 
       @Bean
       public MongoDbFactory mongoDbFactory() throws Exception {

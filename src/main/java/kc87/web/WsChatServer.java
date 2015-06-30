@@ -7,6 +7,7 @@ import com.google.gson.JsonSyntaxException;
 import kc87.domain.ChatLog;
 import kc87.repository.mongo.ChatLogRepository;
 import kc87.service.SessionService;
+import kc87.service.SessionServiceImpl;
 import kc87.web.protocol.ChatMsg;
 import kc87.web.protocol.Message;
 import org.apache.logging.log4j.LogManager;
@@ -70,7 +71,7 @@ public class WsChatServer implements ApplicationContextAware {
    @PostConstruct
    private void init() {
       LOG.debug("@PostConstruct");
-      sessionService = appContext.getBean(SessionService.class);
+      sessionService = appContext.getBean(SessionServiceImpl.class);
       chatLogRepository = appContext.getBean(ChatLogRepository.class);
    }
 

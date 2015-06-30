@@ -12,11 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.repository.init.Jackson2ResourceReader;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -25,38 +20,23 @@ import org.springframework.validation.ObjectError;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Service
 @SuppressWarnings("unused")
-public class DefaultAccountService implements AccountService {
-   private static final Logger LOG = LogManager.getLogger(DefaultAccountService.class);
+public class AccountServiceImpl implements AccountService {
+   private static final Logger LOG = LogManager.getLogger(AccountServiceImpl.class);
    private static final PasswordEncoder PASSWORD_ENCODER = new ScryptPasswordEncoder();
 
    @Autowired
-   WebChatProperties webChatProperties;
+   private WebChatProperties webChatProperties;
 
    @Autowired
    private AccountRepository accountRepository;
 
    @Autowired
    private AccountValidator accountValidator;
-
-   @Override
-   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-      Account account = accountRepository.findByUsernameIgnoreCase(username);
-      if (account != null) {
-         List<GrantedAuthority> authorities = new ArrayList<>();
-         for (String role : account.getRoles().split(",")) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
-         }
-         return new User(account.getUsername(), account.getPassword(), authorities);
-      } else {
-         throw new UsernameNotFoundException("User does not exist!");
-      }
-   }
 
    @Override
    public void createAccount(final Account account) {

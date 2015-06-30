@@ -1,6 +1,5 @@
 package kc87.config;
 
-import kc87.web.WsChatServer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.validator.HibernateValidator;
@@ -15,7 +14,6 @@ import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 
 @Configuration
@@ -23,20 +21,10 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 public class WebAppConfig extends WebMvcConfigurerAdapter {
    private static final Logger LOG = LogManager.getLogger(WebAppConfig.class);
 
+
    @Autowired
    WebChatProperties webChatProperties;
 
-   @Bean
-   public WsChatServer wsChatServer() {
-      WsChatServer chatServer = new WsChatServer();
-      chatServer.setChatSessionTimeout(webChatProperties.getSessionTimeout());
-      return chatServer;
-   }
-
-   @Bean
-   public ServerEndpointExporter serverEndpointExporter() {
-      return new ServerEndpointExporter();
-   }
 
    @Bean
    public ServletListenerRegistrationBean httpSessionEventPublisher() {

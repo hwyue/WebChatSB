@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class PersistenceJpaConfig {
 
-   WebChatProperties webChatProperties;
+   private WebChatProperties webChatProperties;
 
    public PersistenceJpaConfig(final WebChatProperties properties) {
       webChatProperties = properties;
